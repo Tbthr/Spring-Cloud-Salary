@@ -10,13 +10,14 @@
 
 	<modules>
 		<module>account</module>
-		<module>authentication</module>
-		<module>bill</module>
 		<module>eureka</module>
-		<module>index</module>
-		<module>login</module>
-		<module>user</module>
 		<module>zuul</module>
+        <module>provider_bill</module>
+		<module>provider_department</module>
+		<module>provider_menu</module>
+		<module>provider_role</module>
+		<module>provider_user</module>
+		<module>consumer_salary</module>
 	</modules>
 
 	<properties>
