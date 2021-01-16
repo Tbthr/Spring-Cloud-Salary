@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <properties>
+        <!--日志输出位置-->
+        <property name="LOG_HOME">D:/Java/JavaProjects/salary/logs</property>
+    </properties>
+
+    <Appenders>
+        <!-- 将日志输出到控制台-->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <!--设置日志格式及颜色-->
+            <PatternLayout
+                    pattern="[%style{%d}][%highlight{%p}][%style{%thread}][%style{%logger}{yellow}]: %msg%n%style{%throwable}{red}"
+                    disableAnsi="false" noConsoleNoAnsi="false"/>
+        </Console>
+
+        <!-- 将日志输出到文件-->
+        <RollingFile name="FILE-APPENDER"
+                     fileName="${LOG_HOME}/log4j2-salary.log"
+                     filePattern="${LOG_HOME}/log4j2-salary-%d{yyyy-MM-dd}-%i.log">
+            <!--设置日志格式-->
+            <PatternLayout>
+                <pattern>[%d][%p][%t][%C] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- 设置日志文件切分参数 -->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--设置最大存档数-->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <!--保存到数据库配置文件-->
+        <JDBC name="databaseAppender" tableName="log">
+            <ConnectionFactory class="com.salary.config.ConnectionFactoryConfig" method="getDatabaseConnection"/>
+            <Column name="date" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
+            <Column name="username" pattern="%thread"/>
+            <Column name="info" pattern="%level"/>
+            <Column name="module" pattern="%logger"/>
+            <Column name="content" pattern="%m"/>
+        </JDBC>
+    </Appenders>
+
+    <Loggers>
+        <!-- 根日志设置 -->
+        <Root level="debug">
+            <AppenderRef ref="CONSOLE" level="info"/>
+            <AppenderRef ref="FILE-APPENDER" level="warn"/>
+            <AppenderRef ref="databaseAppender" level="warn"/>
+        </Root>
+        <!--spring日志-->
+        <Logger name="org.springframework" level="info"/>
+        <!-- mybatis日志 -->
+        <Logger name="com.mybatis" level="warn"/>
+    </Loggers>
+</configuration>
