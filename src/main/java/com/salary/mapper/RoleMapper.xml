@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.salary.mapper.RoleMapper">
+    <resultMap id="AuthResultMap" type="com.salary.model.Role">
+        <id column="rid" jdbcType="INTEGER" property="id"/>
+        <result column="rname" jdbcType="VARCHAR" property="name"/>
+        <result column="rnameZh" jdbcType="VARCHAR" property="nameZh"/>
+        <collection property="menus" ofType="com.salary.model.Menu">
+            <id column="mid" jdbcType="INTEGER" property="id"/>
+            <result column="murl" jdbcType="VARCHAR" property="url"/>
+            <result column="mpath" jdbcType="VARCHAR" property="path"/>
+            <result column="mname" jdbcType="VARCHAR" property="name"/>
+            <result column="mparent_id" jdbcType="INTEGER" property="parentId"/>
+            <result column="mlevel" jdbcType="INTEGER" property="level"/>
+            <result column="menabled" jdbcType="BIT" property="enabled"/>
+            <collection property="children" ofType="com.salary.model.Menu">
+                <id column="m2id" jdbcType="INTEGER" property="id"/>
+                <result column="m2url" jdbcType="VARCHAR" property="url"/>
+                <result column="m2path" jdbcType="VARCHAR" property="path"/>
+                <result column="m2name" jdbcType="VARCHAR" property="name"/>
+                <result column="m2parentid" jdbcType="INTEGER" property="parentId"/>
+                <result column="m2level" jdbcType="INTEGER" property="level"/>
+                <result column="m2enabled" jdbcType="BIT" property="enabled"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <resultMap id="BaseResultMap" type="com.salary.model.Role">
+        <id column="rid" jdbcType="INTEGER" property="id"/>
+        <result column="rname" jdbcType="VARCHAR" property="name"/>
+        <result column="rnameZh" jdbcType="VARCHAR" property="nameZh"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from role
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.salary.model.Role">
+        insert into role (id, name, nameZh)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.salary.model.Role">
+        update role
+        set name   = #{name,jdbcType=VARCHAR},
+            nameZh = #{nameZh,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select r.id     rid,
+               r.name   rname,
+               r.nameZh rnameZh
+        from role r
+        where r.id = #{id,jdbcType=INTEGER}
+        order by r.id
+    </select>
+    <select id="selectRoleByMenuId" resultType="com.salary.model.Role">
+        select *
+        from role
+        where id in (
+            select role_id
+            from menu_role
+            where menu_id = #{Menuid,jdbcType=INTEGER}
+        )
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select r.id     rid,
+               r.name   rname,
+               r.nameZh rnameZh
+        from role r
+        order by r.id
+    </select>
+    <select id="selectAuthByPrimaryKey" parameterType="java.lang.Integer" resultMap="AuthResultMap">
+        select r.id         rid,
+               r.name       rname,
+               r.nameZh     rnameZh,
+               m.id         mid,
+               m.url        murl,
+               m.path       mpath,
+               m.name       mname,
+               m.parent_id  mparent_id,
+               m.level      mlevel,
+               m.enabled    menabled,
+               m2.id        m2id,
+               m2.url       m2url,
+               m2.path      m2path,
+               m2.name      m2name,
+               m2.parent_id m2parentid,
+               m2.level     m2level,
+               m2.enabled   m2enabled
+        from role r,
+             menu m,
+             menu m2
+        where r.id = #{id,jdbcType=INTEGER}
+          and m.id in (
+            select menu_id
+            from menu_role mr
+            where mr.role_id = #{id,jdbcType=INTEGER}
+        )
+          and m2.id in (
+            select menu_id
+            from menu_role mr
+            where mr.role_id = #{id,jdbcType=INTEGER}
+        )
+          and m2.parent_id = m.id
+        order by r.id, m.id, m2.id
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.salary.mapper.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.salary.model.Department">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="depart_name" jdbcType="VARCHAR" property="departName"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from department
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.salary.model.Department">
+        insert into department (id, depart_name)
+        values (#{id,jdbcType=VARCHAR}, #{departName,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.salary.model.Department">
+        update department
+        set depart_name = #{departName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select id, depart_name
+        from department
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, depart_name
+        from department
+    </select>
+</mapper>
