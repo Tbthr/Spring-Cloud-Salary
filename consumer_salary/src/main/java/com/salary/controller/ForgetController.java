@@ -24,6 +24,8 @@ public class ForgetController {
     @Resource
     private UserService userService;
     @Resource
+    private UserMapper userMapper;
+    @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
@@ -59,7 +61,7 @@ public class ForgetController {
     @PostMapping("/forget")
     public ApiResult forget(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");
-        if (userService.getUserByPrimaryKey(id) == null) {
+        if (userMapper.selectByPrimaryKey(id) == null) {
             return ApiResult.builder().code(500).msg("用户不存在").data(null).build();
         }
         String psd = (String) map.get("psd");
@@ -67,7 +69,7 @@ public class ForgetController {
         String userCode = (String) map.get("code");
         if (SendEmailUtil.codeMap.get(id).equals(userCode)) {
             // 更新密码
-            userService.updatePsdById(id, psd);
+            userMapper.updatePsdById(id, psd);
             return ApiResult.builder().code(200).msg("更改成功").data(null).build();
         }
         return ApiResult.builder().code(500).msg("验证码错误").data(null).build();

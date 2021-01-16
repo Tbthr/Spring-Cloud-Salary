@@ -90,7 +90,7 @@ public interface UserMapper {
      * @param psd 新密码
      */
     @Update("update user set psd = #{psd} where id = #{id}")
-    int updatePsdById(String id, String psd);
+    void updatePsdById(String id, String psd);
 
     /**
      * 给用户赋予角色

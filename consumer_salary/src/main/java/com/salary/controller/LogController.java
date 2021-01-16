@@ -1,7 +1,7 @@
 package com.salary.controller;
 
 import com.salary.aop.Log;
-import com.salary.service.LogServiceFromProvider;
+import com.salary.service.LogService;
 import com.salary.util.ApiResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/sys")
 public class LogController {
     @Resource
-    private LogServiceFromProvider logServiceFromProvider;
+    private LogService logService;
 
     /**
      * 查看日志
@@ -36,7 +36,7 @@ public class LogController {
         return ApiResult.builder()
                 .code(200)
                 .msg("获取日志成功")
-                .data(logServiceFromProvider.getAllLog(map, page, rows))
+                .data(logService.getAllLog(map, page, rows))
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class LogController {
         return ApiResult.builder()
                 .code(200)
                 .msg("获取日志成功")
-                .data(logServiceFromProvider.getAllLogOrigin(map))
+                .data(logService.getAllLogOrigin(map))
                 .build();
     }
 
@@ -69,7 +69,7 @@ public class LogController {
     @PostMapping("/log/delete")
     public ApiResult deleteLogs(@RequestParam List<Integer> ids) {
         for (Integer id : ids) {
-            int i = logServiceFromProvider.deleteById(id);
+            int i = logService.deleteById(id);
             if (i <= 0) {
                 return ApiResult.builder()
                         .code(500)

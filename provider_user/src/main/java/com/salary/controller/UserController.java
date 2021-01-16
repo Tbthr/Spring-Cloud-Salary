@@ -6,7 +6,8 @@ import com.salary.service.UserService;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -25,53 +26,42 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/getUserByIF")
-    public List<User> getUserByIFFromProvider(@RequestBody HashMap<String, Object> map) {
+
+    public List<User> getUserByIFFromProvider(HashMap<String, Object> map) {
         return userService.getUserByIF(map);
     }
 
-    @GetMapping("/getUserByPrimaryKey")
-    public User getUserByPrimaryKeyFromProvider(@RequestParam String id) {
+    public User getUserByPrimaryKeyFromProvider(String id) {
         return userService.getUserByPrimaryKey(id);
     }
 
-    @GetMapping("/getUsersByUserId")
-    public List<User> getUsersByUserIdFromProvider(@RequestParam String userId) {
+    public List<User> getUsersByUserIdFromProvider(String userId) {
         return  userService.getUsersByUserId(userId);
     }
 
-    @GetMapping("/getAllUsers")
     public List<User> getAllUsersFromProvider() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/getIndexInfo")
+
     public Map<String, List<IndexRes>> getIndexInfoFromProvider() {
         return userService.getIndexInfo();
     }
 
-    @PostMapping("/deleteUser")
-    public int deleteUserFromProvider(@RequestParam String id) {
+    public int deleteUserFromProvider(String id) {
         return userService.deleteUser(id);
     }
 
-    @PostMapping("/updateUser")
-    public int updateUserFromProvider(@RequestBody HashMap<String, Object> map) {
+    public int updateUserFromProvider(HashMap<String, Object> map) {
         return userService.updateUser(map);
     }
 
-    @PostMapping("/addUser")
-    public int addUserFromProvider(@RequestBody User user) {
+    public int addUserFromProvider(User user) {
         return userService.addUser(user);
     }
 
-    @PostMapping("/addRoleToUser")
-    public int addRoleToUserFromProvider(@RequestParam String userId,@RequestParam Integer RoleId) {
-        return userService.addRoleToUser(userId,RoleId);
-    }
 
-    @PostMapping("/updatePsdById")
-    public void updatePsdByIdFromProvider(@RequestParam String id,@RequestParam String psd){
-        userService.updatePsdById(id,psd);
+    public int addRoleToUserFromProvider(String userId, Integer RoleId) {
+        return userService.addRoleToUser(userId,RoleId);
     }
 }

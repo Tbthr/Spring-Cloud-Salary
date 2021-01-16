@@ -12,6 +12,6 @@ import java.util.List;
 @Transactional
 public interface UserMapper {
 
-    User getByPrimaryKey(String id);
+    User selectByPrimaryKey(String id);
 
 }
