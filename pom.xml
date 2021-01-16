@@ -9,7 +9,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>account</module>
 		<module>eureka</module>
 		<module>zuul</module>
         <module>provider_bill</module>
@@ -18,6 +17,7 @@
 		<module>provider_role</module>
 		<module>provider_user</module>
 		<module>consumer_salary</module>
+		<module>provider_log</module>
 	</modules>
 
 	<properties>
