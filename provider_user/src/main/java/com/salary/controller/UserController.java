@@ -6,6 +6,7 @@ import com.salary.service.UserService;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-
+    @PostMapping("/getUserByIF")
     public List<User> getUserByIFFromProvider(HashMap<String, Object> map) {
         return userService.getUserByIF(map);
     }
