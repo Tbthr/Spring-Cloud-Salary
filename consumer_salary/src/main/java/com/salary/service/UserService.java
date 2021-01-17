@@ -26,34 +26,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
-@FeignClient("PROVIDER_USER")
+@Service
+@FeignClient("PROVIDER-USER")
 public interface UserService{
 
     @GetMapping("/getUserByIF")
-    List<User> getUserByIFFromProvider(HashMap<String, Object> map);
+    List<User> getUserByIF(@RequestBody HashMap<String, Object> map);
 
     @GetMapping("/getUserByPrimaryKey")
-    User getUserByPrimaryKeyFromProvider(String id);
+    User getUserByPrimaryKey(@RequestParam("id") String id);
 
     @GetMapping("/getUsersByUserId")
-    List<User> getUsersByUserIdFromProvider(String userId);
+    List<User> getUsersByUserId(@RequestParam("userId") String userId);
 
     @GetMapping("/getAllUsers")
-    List<User> getAllUsersFromProvider();
+    List<User> getAllUsers();
 
     @GetMapping("/getIndexInfo")
-    Map<String, List<IndexRes>> getIndexInfoFromProvider();
+    Map<String, List<IndexRes>> getIndexInfo();
 
     @PostMapping("/deleteUser")
-    int deleteUserFromProvider(String id);
+    int deleteUser(@RequestParam("id") String id);
 
     @PostMapping("/updateUser")
-    int updateUserFromProvider(HashMap<String, Object> map);
+    int updateUser(@RequestBody HashMap<String, Object> map);
 
     @PostMapping("/addUser")
-    int addUserFromProvider(User user);
+    int addUser(@RequestBody User user);
 
     @PostMapping("/addRoleToUser")
-    int addRoleToUserFromProvider(String userId,Integer RoleId);
+    int addRoleToUser(@RequestParam("userId") String userId,@RequestParam("RoleId") Integer RoleId);
+
+    @PostMapping("/updatePsdById")
+    int updatePsdById(@RequestParam("id") String id,@RequestParam("psd") String psd);
 }

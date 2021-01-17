@@ -15,30 +15,30 @@ import javax.annotation.Resource;
 import javax.validation.constraints.Min;
 import java.util.List;
 
-@Component
-@FeignClient("PROVIDER_MENU")
+@Service
+@FeignClient("PROVIDER-MENU")
 public interface MenuService {
     @GetMapping("/etMenuByUserId")
-    List<Menu> getMenuByUserIdFromProvider(String id);
+    List<Menu> getMenuByUserId(@RequestParam("id") String id);
 
     @GetMapping("/getMenuByPrimaryKey")
-    Menu getMenuByPrimaryKeyFromProvider(Integer id);
+    Menu getMenuByPrimaryKey(@RequestParam("id") Integer id);
 
     @GetMapping("/getAll")
-    List<Menu> getAllFromProvider();
+    List<Menu> getAll();
 
     @GetMapping("/getAllAsc")
-    List<Menu> getAllAscFromProvider();
+    List<Menu> getAllAsc();
 
     @GetMapping("/getByLevel")
-    List<Menu> getByLevelFromProvider(Integer level);
+    List<Menu> getByLevel(@RequestParam("level") Integer level);
 
     @GetMapping("/getAllAuth")
-    List<Menu> getAllAuthFromProvider();
+    List<Menu> getAllAuth();
 
     @PostMapping("/deleteMenuRoleByAll")
-    int deleteMenuRoleByAllFromProvider(Integer rid,Integer mid);
+    int deleteMenuRoleByAll(@RequestParam("rid") Integer rid,@RequestParam("mid") Integer mid);
 
     @PostMapping("/getNotAuthByRoleId")
-    List<Menu> getNotAuthByRoleIdFromProvider(Integer id);
+    List<Menu> getNotAuthByRoleId(@RequestParam("id") Integer id);
 }

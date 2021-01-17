@@ -7,10 +7,11 @@ feign:
     enabled: true
 
 eureka:
+  instance:
+    hostname: salary:81
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
-
 
 spring:
   application:

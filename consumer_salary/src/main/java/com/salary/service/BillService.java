@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
-@FeignClient("PROVIDER_BILL")
+@Service
+@FeignClient("PROVIDER-BILL")
 public interface BillService {
     /**
      * 查询账单
