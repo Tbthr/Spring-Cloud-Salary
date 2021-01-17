@@ -2,6 +2,7 @@ package com.salary.mapper;
 
 import com.salary.model.Menu;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,7 +97,7 @@ public interface MenuMapper {
      * @return 成功：1 失败：0
      */
     @Delete("delete from menu_role where role_id = #{rid} and menu_id = #{mid}")
-    int deleteMenuRoleByAll(Integer rid, Integer mid);
+    int deleteMenuRoleByAll(@Param("rid") Integer rid, @Param("mid") Integer mid);
 
     /**
      * 获取角色没有获取的权限的权限树

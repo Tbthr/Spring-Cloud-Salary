@@ -24,8 +24,8 @@ public class LogController {
      * @return 根据map筛选后的分页数据
      */
     @Log(info = "SELECT", module = "查看日志")
-    @GetMapping("/log")
-    public ApiResult getAllLogs(@RequestParam HashMap<String, Object> map,
+    @PostMapping("/log")
+    public ApiResult getAllLogs(@RequestBody(required = false) HashMap<String, Object> map,
                                 @RequestParam(required = false, defaultValue = "1") int page,
                                 @RequestParam(required = false, defaultValue = "10") int rows) {
 
@@ -43,8 +43,8 @@ public class LogController {
      * @return 根据map筛选后的数据
      */
     @Log(info = "SELECT", module = "查看日志")
-    @GetMapping("/log/origin")
-    public ApiResult getAllLogsOrigin(@RequestParam HashMap<String, Object> map) {
+    @PostMapping("/log/origin")
+    public ApiResult getAllLogsOrigin(@RequestBody(required = false) HashMap<String, Object> map) {
 
         return ApiResult.builder()
                 .code(200)

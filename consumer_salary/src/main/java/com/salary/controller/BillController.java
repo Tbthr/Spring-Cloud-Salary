@@ -27,10 +27,10 @@ public class BillController {
      * @return 根据map筛选后的分页数据
      */
     @Log(info = "SELECT", module = "查看账单")
-    @GetMapping("/info")
-    public ApiResult getInfo(@RequestParam HashMap<String, Object> map,
-                             @RequestParam(required = false, defaultValue = "1") int page,
-                             @RequestParam(required = false, defaultValue = "10") int rows) {
+    @PostMapping("/info")
+    public ApiResult getInfo(@RequestBody(required = false) HashMap<String, Object> map,
+                             @RequestParam(required = false, defaultValue = "1",value = "page") int page,
+                             @RequestParam(required = false, defaultValue = "10",value = "rows") int rows) {
 
         return ApiResult.builder()
                 .code(200)
@@ -46,8 +46,8 @@ public class BillController {
      * @return 根据map筛选后的数据
      */
     @Log(info = "SELECT", module = "查看账单")
-    @GetMapping("/info/origin")
-    public ApiResult getInfoOrigin(@RequestParam HashMap<String, Object> map) {
+    @PostMapping("/info/origin")
+    public ApiResult getInfoOrigin(@RequestBody(required = false) HashMap<String, Object> map) {
 
         return ApiResult.builder()
                 .code(200)
@@ -62,7 +62,7 @@ public class BillController {
      * @return 账单列表
      */
     @GetMapping("/latest")
-    public ApiResult getLatestBills(@RequestParam String userId) {
+    public ApiResult getLatestBills(@RequestParam("userId") String userId) {
         return ApiResult.builder()
                 .code(200)
                 .msg("获取成功")

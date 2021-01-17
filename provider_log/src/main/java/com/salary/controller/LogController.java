@@ -15,12 +15,12 @@ public class LogController {
     @Resource
     private LogService logService;
 
-    @GetMapping("/getAllLog")
+    @PostMapping("/getAllLog")
     public PageInfo<Log> getAllLog(HashMap<String, Object> map,int page,@RequestParam int rows) {
         return logService.getAllLog(map, page, rows);
     }
 
-    @GetMapping("/getAllLogOrigin")
+    @PostMapping("/getAllLogOrigin")
     public List<Log> getAllLogOrigin(HashMap<String, Object> map) {
         return logService.getAllLogOrigin(map);
     }

@@ -6,9 +6,7 @@ import com.salary.model.Bill;
 import com.salary.model.BillMap;
 import com.salary.service.BillService;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -30,8 +28,8 @@ public class BillController {
      * @param rows 每页条数
      * @return 筛选分页后的账单信息
      */
-    @GetMapping("/getInfo")
-    public PageInfo<Bill> getInfo(HashMap<String, Object> map, int page, int rows) {
+    @PostMapping("/getInfo")
+    public PageInfo<Bill> getInfo(@RequestBody(required = false) HashMap<String, Object> map, @RequestParam("page") int page,@RequestParam("rows") int rows) {
         return billService.getInfo(map, page, rows);
     }
 
@@ -41,8 +39,8 @@ public class BillController {
      * @param map 查询条件
      * @return 筛选后的账单信息
      */
-    @GetMapping("/getInfoOrigin")
-    public List<Bill> getInfoOrigin(HashMap<String, Object> map) {
+    @PostMapping("/getInfoOrigin")
+    public List<Bill> getInfoOrigin(@RequestBody(required = false) HashMap<String, Object> map) {
         return billService.getInfoOrigin(map);
     }
 

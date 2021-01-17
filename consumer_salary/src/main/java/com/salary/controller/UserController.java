@@ -61,8 +61,8 @@ public class UserController {
      * @return 根据map筛选后的数据
      */
     @Log(info = "SELECT", module = "查找员工")
-    @GetMapping("/add/userInfo")
-    public ApiResult getUserByIF(@RequestParam HashMap<String, Object> map) {
+    @PostMapping("/add/userInfo")
+    public ApiResult getUserByIF(@RequestBody(required = false) HashMap<String, Object> map) {
         return ApiResult.builder()
                 .code(200)
                 .msg("获取成功")
@@ -78,7 +78,7 @@ public class UserController {
      */
     @Log(info = "SELECT", module = "查找可选员工(查看账单时)")
     @GetMapping("/add/userInfo/available")
-    public ApiResult getUsersByUserId(@RequestParam String userId) {
+    public ApiResult getUsersByUserId(@RequestParam("userId") String userId) {
         return ApiResult.builder()
                 .code(200)
                 .msg("获取成功")

@@ -4,10 +4,9 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
-import java.util.List;
 
 @Data
-public class User{
+public class User {
 
     /**
      * 工号
@@ -49,7 +48,4 @@ public class User{
     private String gender;
 
     private Department department;
-
-    private List<Role> authorities;
-
 }

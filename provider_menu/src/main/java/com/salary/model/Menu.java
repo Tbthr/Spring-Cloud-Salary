@@ -1,12 +1,10 @@
 package com.salary.model;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@ApiModel("权限实体类")
 @Data
 public class Menu implements Serializable {
 

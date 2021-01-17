@@ -23,17 +23,17 @@ public class TokenFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        RequestContext context=RequestContext.getCurrentContext();
-        HttpServletRequest req=context.getRequest();
-        List<String> urls=new ArrayList<>();
+        RequestContext context = RequestContext.getCurrentContext();
+        HttpServletRequest req = context.getRequest();
+        List<String> urls = new ArrayList<>();
         urls.add("/salary/forget");
         urls.add("/salary/sendMail");
         urls.add("/salary/login");
-        String url=req.getRequestURI();
-        for (String s:urls){
+        String url = req.getRequestURI();
+        for (String s : urls) {
             //在放行的路径里
-            if (s.equals(url)){
-                return  false;
+            if (s.equals(url)) {
+                return false;
             }
         }
         return true;
@@ -42,18 +42,18 @@ public class TokenFilter extends ZuulFilter {
     @SneakyThrows
     @Override
     public Object run() throws ZuulException {
-        RequestContext context=RequestContext.getCurrentContext();
-        HttpServletRequest req=context.getRequest();
+        RequestContext context = RequestContext.getCurrentContext();
+        HttpServletRequest req = context.getRequest();
         /*
          * 是否带有token
          * */
-        String token=req.getParameter("token");
-        if (token==null){
+        String token = req.getHeader("token");
+        if (token == null) {
             //设置不进行路由
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
             //也可以返回数据
-            context.setResponseBody("<h1>timeout token</h1>");
+            context.setResponseBody("none token");
             return null;
         }
         /*
@@ -61,12 +61,12 @@ public class TokenFilter extends ZuulFilter {
          * */
         String id = JWTtoken.getInfoFromToken(token);
         //无效的
-        if (StringUtils.isEmpty(id)){
+        if (StringUtils.isEmpty(id)) {
             //设置不进行路由
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
             //也可以返回数据
-            context.setResponseBody("<h1>erro token</h1>");
+            context.setResponseBody("error token");
         }
 
         return null;

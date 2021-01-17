@@ -12,11 +12,6 @@
     <artifactId>provider_bill</artifactId>
 
     <dependencies>
-        <!--声明试调用Feign-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-        </dependency>
         <!--eureka客户端-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

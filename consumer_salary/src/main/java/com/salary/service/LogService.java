@@ -1,5 +1,6 @@
 package com.salary.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.salary.mapper.LogMapper;
 import com.salary.model.Log;
 import com.salary.model.User;
@@ -47,8 +48,18 @@ public class LogService {
             HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
             Log log = new Log();
             // 获取当前登录用户
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username = user.getName();
+            String username;
+            try {
+                Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                if (o == null) {
+                    username = "未登录";
+                } else {
+                    User user = (User) o;
+                    username = user.getName();
+                }
+            } catch (Exception e) {
+                username = "未登录";
+            }
             if (StringUtils.isEmpty(username)) {
                 username = "未知用户";
             }

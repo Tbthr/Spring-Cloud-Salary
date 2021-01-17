@@ -4,9 +4,6 @@ import com.salary.mapper.UserMapper;
 import com.salary.model.IndexRes;
 import com.salary.model.User;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -22,7 +19,7 @@ import java.util.Map;
 
 @Service
 @Validated
-public class UserService{
+public class UserService {
     @Resource
     private UserMapper userMapper;
 
@@ -137,8 +134,7 @@ public class UserService{
         return userMapper.addRoleToUser(userId, RoleId);
     }
 
-    public int updatePsdById(String id, String psd){
+    public int updatePsdById(String id, String psd) {
         return userMapper.updatePsdById(id, psd);
     }
-
 }

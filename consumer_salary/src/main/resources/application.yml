@@ -2,7 +2,7 @@ server:
   port: 81
 
 mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml # mybatis配置文件地址
+  config-location: classpath:mybatis-config.xml # mybatis配置文件地址
 
 eureka:
   client:
@@ -20,3 +20,14 @@ spring:
     username: root
     password: rpz2020.
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+ribbon:
+  ConnectTimeout: 60000 # 连接超时时间(ms)
+  ReadTimeout: 60000 # 通信超时时间(ms)
+hystrix:
+  command:
+    default:
+    execution:
+    isolation:
+    thread:
+    timeoutInMilliseconds: 60000 # 设置hystrix的超时时间(ms)

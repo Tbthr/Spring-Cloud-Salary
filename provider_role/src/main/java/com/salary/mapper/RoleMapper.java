@@ -3,6 +3,7 @@ package com.salary.mapper;
 import com.salary.model.Role;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,7 @@ public interface RoleMapper {
      * @return 成功：1 失败：0
      */
     @Insert("insert into menu_role(role_id,menu_id) values(#{rid},#{mid})")
-    int insertMenuRole(Integer rid, Integer mid);
+    int insertMenuRole(@Param("rid") Integer rid,@Param("mid") Integer mid);
 
     /**
      * 删除menu_role中角色的所有权限

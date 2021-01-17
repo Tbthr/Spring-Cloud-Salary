@@ -2,6 +2,7 @@ package com.salary.controller;
 
 import com.salary.aop.Log;
 import com.salary.model.User;
+import com.salary.security.UserDetail;
 import com.salary.service.UserService;
 import com.salary.util.ApiResult;
 import com.salary.util.SendEmailUtil;
@@ -18,6 +19,8 @@ import java.util.HashMap;
 @RestController
 public class ForgetController {
     @Resource
+    private UserDetail userDetail;
+    @Resource
     private UserService userService;
     @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -33,7 +36,7 @@ public class ForgetController {
     @PostMapping("/sendMail")
     public ApiResult sendMail(@RequestBody HashMap<String, Object> map) throws GeneralSecurityException, MessagingException {
         String id = (String) map.get("id");
-        User user = userService.getUserByPrimaryKey(id);
+        User user = userDetail.getUserById(id);
         if (user == null) {
             return ApiResult.builder().code(500).msg("用户不存在").data(null).build();
         }
@@ -53,7 +56,7 @@ public class ForgetController {
     @PostMapping("/forget")
     public ApiResult forget(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");
-        if (userService.getUserByPrimaryKey(id) == null) {
+        if (userDetail.getUserById(id) == null) {
             return ApiResult.builder().code(500).msg("用户不存在").data(null).build();
         }
         String psd = (String) map.get("psd");

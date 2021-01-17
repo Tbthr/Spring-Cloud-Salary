@@ -1,8 +1,8 @@
 package com.salary.security;
 
+import com.alibaba.druid.util.StringUtils;
 import com.salary.util.JWTtoken;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +30,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String token = httpServletRequest.getHeader("Authorization");
+        String token = httpServletRequest.getHeader("token");
         if (StringUtils.isEmpty(token)) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;

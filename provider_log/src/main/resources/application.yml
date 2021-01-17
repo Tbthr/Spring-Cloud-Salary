@@ -2,7 +2,7 @@ server:
   port: 8003
 
 mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml # mybatis配置文件地址
+  config-location: classpath:mybatis-config.xml # mybatis配置文件地址
 
 eureka:
   client:
@@ -14,7 +14,7 @@ eureka:
 
 spring:
   application:
-    name: provider-department
+    name: provider-log
   datasource:
     url: jdbc:mysql://47.92.165.44:3306/salary?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT&allowMultiQueries=true
     username: root

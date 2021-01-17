@@ -14,6 +14,10 @@ public class UserDetail implements UserDetailsService {
     @Resource
     private UserMapper userMapper;
 
+    public User getUserById(String id){
+        return userMapper.getById(id);
+    }
+
     @Override
     // 重写的方法不可以参数校验
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
