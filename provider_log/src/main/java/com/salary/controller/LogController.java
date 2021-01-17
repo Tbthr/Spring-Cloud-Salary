@@ -18,17 +18,17 @@ public class LogController {
     private LogService logService;
 
     @GetMapping("/getAllLog")
-    public PageInfo<Log> getAllLog(@RequestBody HashMap<String, Object> map, @RequestParam int page,@RequestParam int rows) {
+    public PageInfo<Log> getAllLog(HashMap<String, Object> map,int page,@RequestParam int rows) {
         return logService.getAllLog(map, page, rows);
     }
 
     @GetMapping("/getAllLogOrigin")
-    public List<Log> getAllLogOrigin(@RequestBody HashMap<String, Object> map) {
+    public List<Log> getAllLogOrigin(HashMap<String, Object> map) {
         return logService.getAllLogOrigin(map);
     }
 
     @PostMapping("/deleteById")
-    public int deleteById(@RequestParam Integer id) {
+    public int deleteById(Integer id) {
         return logService.deleteById(id);
     }
 }
