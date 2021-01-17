@@ -25,7 +25,7 @@ public interface BillService {
      * @param rows 每页条数
      * @return 筛选分页后的账单信息
      */
-    @GetMapping("/getInfo")
+    @GetMapping("/bill/getInfo")
     public PageInfo<Bill> getInfo(HashMap<String, Object> map, int page, int rows);
 
     /**
@@ -34,7 +34,7 @@ public interface BillService {
      * @param map 查询条件
      * @return 筛选后的账单信息
      */
-    @GetMapping("/getInfoOrigin")
+    @GetMapping("/bill/getInfoOrigin")
     public List<Bill> getInfoOrigin(HashMap<String, Object> map);
 
     /**
@@ -44,7 +44,7 @@ public interface BillService {
      * @param userId 工号
      * @return 账单
      */
-    @GetMapping("/getBillById")
+    @GetMapping("/bill/getBillById")
     public Bill getBillById(String date, String userId);
 
     /**
@@ -53,7 +53,7 @@ public interface BillService {
      * @param map 数据
      * @return 响应实体类
      */
-    @PostMapping("/submit")
+    @PostMapping("/bill/submit")
     public ApiResult submit(Map<String, Object> map);
 
     /**
@@ -61,7 +61,7 @@ public interface BillService {
      *
      * @return 账单列表
      */
-    @GetMapping("/getLatestBills")
+    @GetMapping("/bill/getLatestBills")
     public List<BillMap> getLatestBills(String userId);
 
     /**
@@ -70,7 +70,7 @@ public interface BillService {
      * @param bill 账单信息
      * @return 成功：1 失败：0
      */
-    @PostMapping("/insertBill")
+    @PostMapping("/bill/insertBill")
     public int insertBill(@Valid Bill bill);
 
     /**
@@ -79,6 +79,6 @@ public interface BillService {
      * @param bill 账单信息
      * @return 成功：1 失败：0
      */
-    @PostMapping("/updateBill")
+    @PostMapping("/bill/updateBill")
     public int updateBill(@Valid Bill bill);
 }

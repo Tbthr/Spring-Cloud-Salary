@@ -1,16 +1,13 @@
 package com.salary.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.salary.mapper.LogMapper;
 import com.salary.model.Log;
 import com.salary.model.User;
 import com.salary.util.CusAccessObjectUtil;
-import javassist.*;
-import javassist.bytecode.CodeAttribute;
-import javassist.bytecode.LocalVariableAttribute;
-import javassist.bytecode.MethodInfo;
+import org.apache.ibatis.javassist.*;
+import org.apache.ibatis.javassist.bytecode.CodeAttribute;
+import org.apache.ibatis.javassist.bytecode.LocalVariableAttribute;
+import org.apache.ibatis.javassist.bytecode.MethodInfo;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -24,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -71,7 +67,6 @@ public class LogService {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 格式化content内容

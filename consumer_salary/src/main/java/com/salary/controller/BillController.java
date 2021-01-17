@@ -1,24 +1,17 @@
 package com.salary.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salary.aop.Log;
 import com.salary.model.Bill;
 import com.salary.service.BillService;
 import com.salary.util.ApiResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "账单信息")
 @RestController
 @RequestMapping("/bills")
 public class BillController {
@@ -34,7 +27,6 @@ public class BillController {
      * @return 根据map筛选后的分页数据
      */
     @Log(info = "SELECT", module = "查看账单")
-    @ApiOperation(value = "查看账单", notes = "根据条件筛选(分页)")
     @GetMapping("/info")
     public ApiResult getInfo(@RequestParam HashMap<String, Object> map,
                              @RequestParam(required = false, defaultValue = "1") int page,
@@ -54,7 +46,6 @@ public class BillController {
      * @return 根据map筛选后的数据
      */
     @Log(info = "SELECT", module = "查看账单")
-    @ApiOperation(value = "查看账单", notes = "根据条件筛选(不分页)")
     @GetMapping("/info/origin")
     public ApiResult getInfoOrigin(@RequestParam HashMap<String, Object> map) {
 
@@ -87,7 +78,6 @@ public class BillController {
      * @throws ParseException 日期转换异常
      */
     @Log(info = "INSERT", module = "提交账单")
-    @ApiOperation(value = "提交账单", notes = "")
     @PostMapping("/submit")
     public ApiResult submit(@RequestBody Map<String, Object> map) throws ParseException {
         return billService.submit(map);
@@ -100,7 +90,6 @@ public class BillController {
      * @return 是否操作成功
      */
     @Log(info = "UPDATE", module = "审批账单")
-    @ApiOperation(value = "审批账单", notes = "")
     @PostMapping("/check")
     public ApiResult check(@RequestBody List<Bill> list) {
         for (Bill bill : list) {

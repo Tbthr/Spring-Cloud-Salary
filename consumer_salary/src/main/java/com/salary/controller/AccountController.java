@@ -5,8 +5,6 @@ import com.salary.model.User;
 import com.salary.service.UserService;
 import com.salary.util.ApiResult;
 import com.salary.util.SendEmailUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-@Api(tags = {"个人信息"})
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -32,7 +29,6 @@ public class AccountController {
      * @return 返回user的所有信息
      */
     @Log(info = "SELECT", module = "查看个人信息")
-    @ApiOperation(value = "查看个人信息", notes = "")
     @PostMapping("/info")
     public ApiResult getInfo(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");
@@ -57,7 +53,6 @@ public class AccountController {
      * @return 最新的个人信息
      */
     @Log(info = "UPDATE", module = "修改个人信息")
-    @ApiOperation(value = "修改个人信息", notes = "")
     @PostMapping("/edit/info")
     public ApiResult editInfo(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");
@@ -89,7 +84,6 @@ public class AccountController {
      * @return 操作的状态
      */
     @Log(info = "UPDATE", module = "修改密码")
-    @ApiOperation(value = "修改密码", notes = "")
     @PostMapping("/edit/psd")
     public ApiResult editPsd(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");

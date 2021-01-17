@@ -1,13 +1,10 @@
 package com.salary.controller;
 
 import com.salary.aop.Log;
-import com.salary.mapper.UserMapper;
 import com.salary.model.User;
 import com.salary.service.UserService;
 import com.salary.util.ApiResult;
 import com.salary.util.SendEmailUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +15,6 @@ import javax.mail.MessagingException;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 
-@Api(tags = {"忘记密码"})
 @RestController
 public class ForgetController {
     @Resource
@@ -34,7 +30,6 @@ public class ForgetController {
      * @throws MessagingException
      */
     @Log(info = "INFO",module = "获取验证码")
-    @ApiOperation(value = "获取验证码", notes = "")
     @PostMapping("/sendMail")
     public ApiResult sendMail(@RequestBody HashMap<String, Object> map) throws GeneralSecurityException, MessagingException {
         String id = (String) map.get("id");
@@ -55,7 +50,6 @@ public class ForgetController {
      * @return 操作的状态码
      */
     @Log(info = "UPDATE",module = "重置密码")
-    @ApiOperation(value = "重置密码")
     @PostMapping("/forget")
     public ApiResult forget(@RequestBody HashMap<String, Object> map) {
         String id = (String) map.get("id");

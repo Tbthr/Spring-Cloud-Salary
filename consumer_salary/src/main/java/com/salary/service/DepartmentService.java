@@ -15,6 +15,6 @@ public interface DepartmentService {
      *
      * @return 部门列表
      */
-    @GetMapping("/getAllDeparts")
+    @GetMapping("/depart/getAllDeparts")
     List<Department> getAllDeparts();
 }

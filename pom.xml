@@ -42,8 +42,8 @@
 			<!--声明试调用Feign-->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-feign</artifactId>
-				<version>1.4.6.RELEASE</version>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>2.2.1.RELEASE</version>
 			</dependency>
 			<!--eureka注册中心-->
 			<dependency>

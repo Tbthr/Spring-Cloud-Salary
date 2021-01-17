@@ -6,8 +6,6 @@ import com.salary.model.Role;
 import com.salary.service.MenuService;
 import com.salary.service.RoleService;
 import com.salary.util.ApiResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,7 +13,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-@Api(tags = "权限管理")
 @RestController
 @RequestMapping("/authority")
 public class AuthenticationController {
@@ -30,7 +27,6 @@ public class AuthenticationController {
      * @return 权限列表
      */
     @Log(info = "SELECT", module = "获取权限列表")
-    @ApiOperation(value = "获取权限列表", notes = "")
     @GetMapping("/menu")
     public Object getAllMenu() {
         try {
@@ -54,7 +50,6 @@ public class AuthenticationController {
      * @return 角色列表，以树状结构返回
      */
     @Log(info = "SELECT", module = "获取角色列表")
-    @ApiOperation(value = "获取角色列表", notes = "")
     @GetMapping("/role")
     public Object getAllRole() {
         try {
@@ -79,7 +74,6 @@ public class AuthenticationController {
      * @return 返回最新的角色列表以树状结构
      */
     @Log(info = "INSERT", module = "增加角色")
-    @ApiOperation(value = "增加角色", notes = "")
     @PostMapping("/role/add/role")
     public Object addRole(@RequestBody HashMap<String, Object> map) {
         String name = (String) map.get("name");
@@ -114,7 +108,6 @@ public class AuthenticationController {
      * @return 该id对应的角色所没有拥有的权限
      */
     @Log(info = "SELECT", module = "获取权限树")
-    @ApiOperation(value = "获取权限树", notes = "")
     @PostMapping("/role/add/menutree")
     public Object getMenuTree(@RequestBody HashMap<String, Object> map) {
         int id = (int) map.get("id");
@@ -132,7 +125,6 @@ public class AuthenticationController {
      * @return 最新的角色权限树列表
      */
     @Log(info = "INSERT", module = "添加权限")
-    @ApiOperation(value = "添加权限", notes = "")
     @PostMapping("/role/add/menu")
     public Object addMenus(@RequestBody HashMap<String, Object> map) {
         int rid = (int) map.get("roleId");
@@ -162,7 +154,6 @@ public class AuthenticationController {
      * @return 最新的角色权限树列表
      */
     @Log(info = "UPDATE", module = "修改角色")
-    @ApiOperation(value = "修改角色", notes = "")
     @PostMapping("/role/update")
     public Object updateRole(@RequestBody HashMap<String, Object> map) {
         try {
@@ -195,7 +186,6 @@ public class AuthenticationController {
      * @return 最新的角色权限树列表
      */
     @Log(info = "DELETE", module = "删除角色")
-    @ApiOperation(value = "删除角色", notes = "")
     @PostMapping("/role/delete/roles")
     public Object deleteRoles(@RequestBody HashMap<String, Object> map) {
         List<Integer> rid = (List<Integer>) map.get("id");
@@ -225,7 +215,6 @@ public class AuthenticationController {
      * @return 最新的角色权限树列表
      */
     @Log(info = "DELETE", module = "删除权限")
-    @ApiOperation(value = "删除权限", notes = "")
     @PostMapping("/role/delete/menus")
     public Object deleteMenus(@RequestBody HashMap<String, Object> map) {
         int rid = (int) map.get("roleId");

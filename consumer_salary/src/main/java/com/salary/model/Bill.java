@@ -1,7 +1,6 @@
 package com.salary.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@ApiModel("账单信息实体类")
 @Data
 public class Bill implements Serializable {
 
