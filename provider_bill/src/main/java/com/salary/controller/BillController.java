@@ -1,6 +1,7 @@
 package com.salary.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.salary.model.ApiResult;
 import com.salary.model.Bill;
 import com.salary.model.BillMap;
 import com.salary.service.BillService;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/bill")
 public class BillController {
@@ -53,6 +56,17 @@ public class BillController {
     @GetMapping("/getBillById")
     public Bill getBillById(String date, @Length(min = 10, max = 10, message = "账号长度为 10 位") String userId) {
         return billService.getBillById(date + '%', userId);
+    }
+
+    /**
+     * 提交账单
+     * @param map 数据
+     * @return 响应实体类
+     * @throws ParseException 转换异常
+     */
+    @PostMapping("/submit")
+    public ApiResult submit(Map<String, Object> map) throws ParseException {
+        return billService.submit(map);
     }
 
     /**

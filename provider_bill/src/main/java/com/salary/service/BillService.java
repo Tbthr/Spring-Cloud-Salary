@@ -1,8 +1,11 @@
 package com.salary.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.salary.mapper.BillMapper;
+import com.salary.model.ApiResult;
 import com.salary.model.Bill;
 import com.salary.model.BillMap;
 import org.hibernate.validator.constraints.Length;
@@ -12,12 +15,18 @@ import org.springframework.validation.annotation.Validated;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Validated //参数校验
 public class BillService {
+    @Resource
+    private ObjectMapper objectMapper;
     @Resource
     private BillMapper billMapper;
 
@@ -53,6 +62,58 @@ public class BillService {
      */
     public Bill getBillById(String date, @Length(min = 10, max = 10, message = "账号长度为 10 位") String userId) {
         return billMapper.selectById(date + '%', userId);
+    }
+
+    /**
+     * 提交账单
+     * @param map 数据
+     * @return 响应实体类
+     * @throws ParseException 转换异常
+     */
+    public ApiResult submit(Map<String, Object> map) throws ParseException {
+        int i, j;
+        String s = (String) map.get("date");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
+        Date date = simpleDateFormat.parse(s);
+//        System.out.println(date);   //Thu Feb 01 00:00:00 CST 2018
+//        System.out.println(simpleDateFormat.format(date));  // 2018-02-01
+        List<Bill> temp = (List<Bill>) map.get("bills");
+        List<Bill> bills = objectMapper.convertValue(temp, new TypeReference<List<Bill>>() {
+        }); // 解决 class java.util.LinkedHashMap cannot be cast to class com.salary.model.Bill
+        for (Bill bill : bills) {
+            bill.setDate(date);
+            String format = simpleDateFormat.format(date);
+            bill = calculateTax(bill); // 计算个税
+            if (getBillById(format, bill.getUserId()) != null) {
+                // 如果是重新提交 修改状态
+                bill.setCheckStatus(0);
+                bill.setMark(null);
+                bill.setCheckTime(null);
+
+                i = updateBill(bill);
+                if (i <= 0) {
+                    return ApiResult.builder()
+                            .code(500)
+                            .msg("提交错误")
+                            .data(null)
+                            .build();
+                }
+            } else {
+                j = insertBill(bill);
+                if (j <= 0) {
+                    return ApiResult.builder()
+                            .code(500)
+                            .msg("提交错误")
+                            .data(null)
+                            .build();
+                }
+            }
+        }
+        return ApiResult.builder()
+                .code(200)
+                .msg("提交成功")
+                .data(null)
+                .build();
     }
 
     /**
