@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @FeignClient("PROVIDER-MENU")
 public interface MenuService {
-    @GetMapping("/etMenuByUserId")
+    @GetMapping("/getMenuByUserId")
     List<Menu> getMenuByUserId(@RequestParam("id") String id);
 
     @GetMapping("/getMenuByPrimaryKey")

@@ -15,7 +15,7 @@ public class MenuController {
     @Resource
     private MenuService menuService;
 
-    @GetMapping("/etMenuByUserId")
+    @GetMapping("/getMenuByUserId")
     public List<Menu> getMenuByUserIdFromProvider(@RequestParam String id) {
         return menuService.getMenuByUserId(id);
     }
