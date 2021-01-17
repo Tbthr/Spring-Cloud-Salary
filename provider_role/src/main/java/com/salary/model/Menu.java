@@ -8,7 +8,7 @@ import java.util.List;
 
 @ApiModel("权限实体类")
 @Data
-public class Menu implements Serializable {
+public class Menu {
 
     private Integer id;
 

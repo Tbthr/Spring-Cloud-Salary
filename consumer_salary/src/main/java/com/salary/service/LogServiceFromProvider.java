@@ -17,12 +17,12 @@ import java.util.List;
 @FeignClient("PROVIDER-LOG")
 public interface LogServiceFromProvider {
 
-    @GetMapping("/getAllLog")
+    @GetMapping("/log/getAllLog")
     PageInfo<Log> getAllLog(@RequestBody HashMap<String, Object> map, @RequestParam("page") int page, @RequestParam("rows") int rows);
 
-    @GetMapping("/getAllLogOrigin")
+    @GetMapping("/log/getAllLogOrigin")
     List<Log> getAllLogOrigin(@RequestBody HashMap<String, Object> map);
 
-    @PostMapping("/deleteById")
+    @PostMapping("/log/deleteById")
     int deleteById(@RequestParam("id") Integer id);
 }
