@@ -3,15 +3,17 @@ server:
 
 spring:
   application:
-    name: proider_role
-
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:7001/eureka/
+    name: provider-role
   datasource:
     url: jdbc:mysql://localhost:3306/salary?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT&allowMultiQueries=true
     username: root
     password: abcABC1230.
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+eureka:
+  instance:
+    hostname: provider-role:8005
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+

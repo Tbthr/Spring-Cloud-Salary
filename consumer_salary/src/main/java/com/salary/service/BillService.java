@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
-@Component
-@FeignClient("PROVIDER_BILL")
+@Service
+@FeignClient("PROVIDER-BILL")
 public interface BillService {
 
 }

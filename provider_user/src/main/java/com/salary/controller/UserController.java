@@ -69,4 +69,9 @@ public class UserController {
     public int addRoleToUserFromProvider(@RequestParam String userId,@RequestParam Integer RoleId) {
         return userService.addRoleToUser(userId,RoleId);
     }
+
+    @PostMapping("/updatePsdById")
+    public void updatePsdByIdFromProvider(@RequestParam String id,@RequestParam String psd){
+        userService.updatePsdById(id,psd);
+    }
 }

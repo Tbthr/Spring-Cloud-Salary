@@ -1,2 +1,18 @@
 server:
   port: 8080
+
+spring:
+  application:
+    name: zuul
+
+eureka:
+  instance:
+    hostname: zuul:8080
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+
+zuul:
+  routes:
+    salary.path: /salary/**
+    salary.serviceId: SALARY

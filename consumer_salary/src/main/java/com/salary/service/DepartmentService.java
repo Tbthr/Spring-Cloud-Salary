@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Component
-@FeignClient("PROVIDER_DEPATMENT")
+@Service
+@FeignClient("PROVIDER-DEPATMENT")
 public interface DepartmentService {
 
 }

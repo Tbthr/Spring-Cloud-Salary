@@ -1,0 +1,23 @@
+server:
+  port: 81
+
+
+feign:
+  hystrix:
+    enabled: true
+
+eureka:
+  instance:
+    hostname: salary:81
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+
+spring:
+  application:
+    name: salary
+  datasource:
+    url: jdbc:mysql://localhost:3306/salary?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT&allowMultiQueries=true
+    username: root
+    password: abcABC1230.
+    driver-class-name: com.mysql.cj.jdbc.Driver

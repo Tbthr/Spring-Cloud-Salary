@@ -137,4 +137,8 @@ public class UserService{
         return userMapper.addRoleToUser(userId, RoleId);
     }
 
+    public int updatePsdById(String id, String psd){
+        return userMapper.updatePsdById(id, psd);
+    }
+
 }

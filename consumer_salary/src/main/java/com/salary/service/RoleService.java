@@ -4,6 +4,7 @@ package com.salary.service;
 import com.salary.model.Role;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,40 +13,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 
-@Component
-@FeignClient("PROVIDER_ROLE")
+@Service
+@FeignClient("PROVIDER-ROLE")
 public interface RoleService {
     @GetMapping("/selectByName")
-    Role selectByNameFromProvider(String name);
+    Role selectByName(@RequestParam("name") String name);
 
     @GetMapping("/getAllFromProvider")
-    List<Role> getAllFromProvider();
+    List<Role> getAll();
 
     @PostMapping("/insertRole")
-    int insertRoleFromProvider(Role role);
+    int insertRole(@RequestBody Role role);
 
     @GetMapping("/getAllRoleAuth")
-    List<Role> getAllRoleAuthFromProvider();
+    List<Role> getAllRoleAuth();
 
     @PostMapping("/insertMenuRole")
-    int insertMenuRoleFromProvider(Integer rid,Integer mid);
+    int insertMenuRole(@RequestParam("rid") Integer rid,@RequestParam("mid") Integer mid);
 
     @PostMapping("/deleteMenuRoleById")
-    int deleteMenuRoleByIdFromProvider(Integer id);
+    int deleteMenuRoleById(@RequestParam("id") Integer id);
 
     @PostMapping("/deleteByPrimaryKey")
-    int deleteByPrimaryKeyFromProvider(Integer id);
+    int deleteByPrimaryKey(@RequestParam("id") Integer id);
 
     @GetMapping("/selectRoleIdByName")
-    public Integer selectRoleIdByNameFromProvider(String name);
+    public Integer selectRoleIdByName(@RequestParam("name") String name);
 
     @PostMapping("/init")
-    void initFromProvider(Integer id,List<Integer> menuId);
+    void init(@RequestParam("id") Integer id,@RequestParam("menuId") List<Integer> menuId);
 
     @PostMapping("/updateRole")
-    int updateRoleFromProvider(Role role);
+    int updateRole(@RequestBody Role role);
 
     @GetMapping("/selectByPrimaryKey")
-    Role selectByPrimaryKeyFromProvider(Integer id);
+    Role selectByPrimaryKey(@RequestParam("id") Integer id);
 
 }
