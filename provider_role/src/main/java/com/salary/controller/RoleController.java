@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -14,8 +15,8 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
-    @GetMapping("/selectByName/{name}")
-    public Role selectByNameFromProvider(@PathVariable("name") String name){
+    @GetMapping("/selectByName")
+    public Role selectByNameFromProvider(@RequestParam String name){
         return roleService.selectByName(name);
     }
 
@@ -24,36 +25,48 @@ public class RoleController {
         return roleService.getAll();
     }
 
-    public int insertRoleFromProvider(Role role){
+    @PostMapping("/insertRole")
+    public int insertRoleFromProvider(@RequestBody Role role){
         return roleService.insertRole(role);
     }
 
+    @GetMapping("/getAllRoleAuth")
     public List<Role> getAllRoleAuthFromProvider(){
         return roleService.getAllRoleAuth();
     }
 
-    public int insertMenuRoleFromProvider(Integer rid,Integer mid) {
+    @PostMapping("/insertMenuRole")
+    public int insertMenuRoleFromProvider(@RequestParam Integer rid,@RequestParam Integer mid) {
         return roleService.insertMenuRole(rid,mid);
     }
 
-    public int deleteMenuRoleByIdFromProvider(Integer id){
+    @PostMapping("/deleteMenuRoleById")
+    public int deleteMenuRoleByIdFromProvider(@RequestParam Integer id){
         return roleService.deleteMenuRoleById(id);
     }
 
-    public int deleteByPrimaryKeyFromProvider(Integer id){
+    @PostMapping("/deleteByPrimaryKey")
+    public int deleteByPrimaryKeyFromProvider(@RequestParam Integer id){
         return roleService.deleteByPrimaryKey(id);
     }
 
-    public Integer selectRoleIdByNameFromProvider(String name){
+    @GetMapping("/selectRoleIdByName")
+    public Integer selectRoleIdByNameFromProvider(@RequestParam String name){
         return roleService.selectRoleIdByName(name);
     }
-    public void initFromProvider(Integer id, List<Integer> menuId){
+
+    @PostMapping("/init")
+    public void initFromProvider(@RequestParam Integer id,@RequestParam List<Integer> menuId){
         roleService.init(id, menuId);
     }
-    public int updateRoleFromProvider(Role role){
+
+    @PostMapping("/updateRole")
+    public int updateRoleFromProvider(@RequestBody Role role){
         return roleService.updateRole(role);
     }
-    public Role selectByPrimaryKeyFromProvider(Integer id){
+
+    @GetMapping("/selectByPrimaryKey")
+    public Role selectByPrimaryKeyFromProvider(@RequestParam Integer id){
         return roleService.selectByPrimaryKey(id);
     }
 }

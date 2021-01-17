@@ -3,8 +3,7 @@ package com.salary.controller;
 import com.salary.model.Menu;
 import com.salary.service.MenuService;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
@@ -16,39 +15,43 @@ public class MenuController {
     @Resource
     private MenuService menuService;
 
-    public List<Menu> getMenuByUserIdFromProvider(String id) {
+    @GetMapping("/etMenuByUserId")
+    public List<Menu> getMenuByUserIdFromProvider(@RequestParam String id) {
         return menuService.getMenuByUserId(id);
     }
 
-    public Menu getMenuByPrimaryKeyFromProvider(Integer id) {
+    @GetMapping("/getMenuByPrimaryKey")
+    public Menu getMenuByPrimaryKeyFromProvider(@RequestParam Integer id) {
         return menuService.getMenuByPrimaryKey(id);
     }
 
+    @GetMapping("/getAll")
     public List<Menu> getAllFromProvider() {
         return menuService.getAll();
     }
 
-
+    @GetMapping("/getAllAsc")
     public List<Menu> getAllAscFromProvider() {
         return menuService.getAllAsc();
     }
 
-
-    public List<Menu> getByLevelFromProvider(Integer level) {
+    @GetMapping("/getByLevel")
+    public List<Menu> getByLevelFromProvider(@RequestParam Integer level) {
         return menuService.getByLevel(level);
     }
 
-
+    @GetMapping("/getAllAuth")
     public List<Menu> getAllAuthFromProvider() {
         return menuService.getAllAuth();
     }
 
-
-    public int deleteMenuRoleByAllFromProvider(Integer rid,Integer mid) {
+    @PostMapping("/deleteMenuRoleByAll")
+    public int deleteMenuRoleByAllFromProvider(@RequestParam Integer rid,@RequestParam Integer mid) {
         return menuService.deleteMenuRoleByAll(rid, mid);
     }
 
-    public List<Menu> getNotAuthByRoleIdFromProvider(Integer id) {
+    @PostMapping("/getNotAuthByRoleId")
+    public List<Menu> getNotAuthByRoleIdFromProvider(@RequestParam Integer id) {
         return menuService.getNotAuthByRoleId(id);
     }
 }
