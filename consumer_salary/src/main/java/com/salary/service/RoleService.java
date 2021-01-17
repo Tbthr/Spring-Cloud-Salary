@@ -16,37 +16,37 @@ import java.util.List;
 @Service
 @FeignClient("PROVIDER-ROLE")
 public interface RoleService {
-    @GetMapping("/selectByName")
+    @GetMapping("/role/selectByName")
     Role selectByName(@RequestParam("name") String name);
 
-    @GetMapping("/getAllFromProvider")
+    @GetMapping("/role/getAllFromProvider")
     List<Role> getAll();
 
-    @PostMapping("/insertRole")
+    @PostMapping("/role/insertRole")
     int insertRole(@RequestBody Role role);
 
-    @GetMapping("/getAllRoleAuth")
+    @GetMapping("/role/getAllRoleAuth")
     List<Role> getAllRoleAuth();
 
-    @PostMapping("/insertMenuRole")
+    @PostMapping("/role/insertMenuRole")
     int insertMenuRole(@RequestParam("rid") Integer rid,@RequestParam("mid") Integer mid);
 
-    @PostMapping("/deleteMenuRoleById")
+    @PostMapping("/role/deleteMenuRoleById")
     int deleteMenuRoleById(@RequestParam("id") Integer id);
 
-    @PostMapping("/deleteByPrimaryKey")
+    @PostMapping("/role/deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("id") Integer id);
 
-    @GetMapping("/selectRoleIdByName")
+    @GetMapping("/role/selectRoleIdByName")
     public Integer selectRoleIdByName(@RequestParam("name") String name);
 
-    @PostMapping("/init")
+    @PostMapping("/role/init")
     void init(@RequestParam("id") Integer id,@RequestParam("menuId") List<Integer> menuId);
 
-    @PostMapping("/updateRole")
+    @PostMapping("/role/updateRole")
     int updateRole(@RequestBody Role role);
 
-    @GetMapping("/selectByPrimaryKey")
+    @GetMapping("/role/selectByPrimaryKey")
     Role selectByPrimaryKey(@RequestParam("id") Integer id);
 
 }

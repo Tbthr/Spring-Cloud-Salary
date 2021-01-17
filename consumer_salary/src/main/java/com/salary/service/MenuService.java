@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,27 +19,27 @@ import java.util.List;
 @Service
 @FeignClient("PROVIDER-MENU")
 public interface MenuService {
-    @GetMapping("/getMenuByUserId")
+    @GetMapping("/menu/getMenuByUserId")
     List<Menu> getMenuByUserId(@RequestParam("id") String id);
 
-    @GetMapping("/getMenuByPrimaryKey")
+    @GetMapping("/menu/getMenuByPrimaryKey")
     Menu getMenuByPrimaryKey(@RequestParam("id") Integer id);
 
-    @GetMapping("/getAll")
+    @GetMapping("/menu/getAll")
     List<Menu> getAll();
 
-    @GetMapping("/getAllAsc")
+    @GetMapping("/menu/getAllAsc")
     List<Menu> getAllAsc();
 
-    @GetMapping("/getByLevel")
+    @GetMapping("/menu/getByLevel")
     List<Menu> getByLevel(@RequestParam("level") Integer level);
 
-    @GetMapping("/getAllAuth")
+    @GetMapping("/menu/getAllAuth")
     List<Menu> getAllAuth();
 
-    @PostMapping("/deleteMenuRoleByAll")
+    @PostMapping("/menu/deleteMenuRoleByAll")
     int deleteMenuRoleByAll(@RequestParam("rid") Integer rid,@RequestParam("mid") Integer mid);
 
-    @PostMapping("/getNotAuthByRoleId")
+    @PostMapping("/menu/getNotAuthByRoleId")
     List<Menu> getNotAuthByRoleId(@RequestParam("id") Integer id);
 }

@@ -6,8 +6,6 @@ spring:
     name: zuul
 
 eureka:
-  instance:
-    hostname: zuul:8080
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
@@ -16,3 +14,14 @@ zuul:
   routes:
     salary.path: /salary/**
     salary.serviceId: SALARY
+
+ribbon:
+  ConnectTimeout: 5000 # 连接超时时间(ms)
+  ReadTimeout: 5000 # 通信超时时间(ms)
+hystrix:
+  command:
+    default:
+    execution:
+    isolation:
+    thread:
+    timeoutInMilliseconds: 60000 # 设置hystrix的超时时间为6000ms

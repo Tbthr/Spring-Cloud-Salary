@@ -7,8 +7,6 @@ feign:
     enabled: true
 
 eureka:
-  instance:
-    hostname: salary:81
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
@@ -22,7 +20,3 @@ spring:
     username: root
     password: abcABC1230.
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-ribbon:
-  eureka:
-    enabled: true
