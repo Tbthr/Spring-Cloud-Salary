@@ -90,11 +90,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
             <exclusions>
-                <exclusion>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-            </exclusions>
+            <exclusion>
+                <artifactId>spring-boot-starter-logging</artifactId>
+                <groupId>org.springframework.boot</groupId>
+            </exclusion>
+        </exclusions>
         </dependency>
         <!--Log4j2-->
         <dependency>
