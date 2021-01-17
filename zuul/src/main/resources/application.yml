@@ -1,18 +1,24 @@
 server:
-  port: 8080
+  port: 9527
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: provider-department-8002 # 修改eureka上的默认描述信息
+    prefer-ip-address: true  # true 可以显示服务的IP地址
 
 spring:
   application:
     name: zuul
 
-eureka:
-  instance:
-    hostname: zuul:8080
-  client:
-    service-url:
-      defaultZone: http://localhost:7001/eureka/
-
 zuul:
   routes:
-    salary.path: /salary/**
-    salary.serviceId: SALARY
+    # 下面两个等价{服务名称：路径}
+    # springcloud-provider-dept: /mydept/**
+    mydept.serviceId: springcloud-provider-dept # 服务名称
+    mydept.path: /mydept/** # 替代服务名称
+  ignored-services: "*"  # 不能再使用这个路径访问了，ignored：忽略,隐藏全部的~
+  prefix: /kuang # 设置公共的前缀
+  # 根据以上配置，访问 http://localhost:9527/kuang/mydept/dept/get/1 即可获取数据

@@ -27,7 +27,7 @@ public class LogAspect {
 
     @AfterReturning(pointcut = "logPointCut()")
     public void doAfter(JoinPoint joinPoint) {
-        /**
+        /*
          * 解析Log注解
          */
         String methodName = joinPoint.getSignature().getName();
@@ -44,7 +44,7 @@ public class LogAspect {
      * @return 方法
      */
     private Method currentMethod(JoinPoint joinPoint, String methodName) {
-        /**
+        /*
          * 获取目标类的所有方法，找到当前要执行的方法
          */
         Method[] methods = joinPoint.getTarget().getClass().getMethods();

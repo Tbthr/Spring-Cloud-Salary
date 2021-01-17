@@ -9,8 +9,6 @@
     </parent>
 
     <artifactId>eureka</artifactId>
-    <name>eureka</name>
-    <description>Eureka Service</description>
 
     <dependencies>
         <!--eureka注册中心-->
