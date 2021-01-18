@@ -1,10 +1,10 @@
 server:
-  port: 7001
+  port: 7002
 
 #Eureka配置
 eureka:
   instance:
-    hostname: eureka # Eureka服务端的实例名称
+    hostname: eureka7002 # Eureka服务端的实例名称
   client:
     # 在默认情况下，Eureka会将自己也作为客户端尝试注册，所以我们需要禁止该行为
     register-with-eureka: false # 表示是否向 eureka注册中心 注册自己

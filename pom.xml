@@ -9,7 +9,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>eureka</module>
+		<module>eureka7001</module>
+		<module>eureka7002</module>
 		<module>zuul</module>
         <module>provider_bill</module>
 		<module>provider_department</module>
