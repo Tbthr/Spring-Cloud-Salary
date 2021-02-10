@@ -17,8 +17,8 @@
 		<module>provider_menu</module>
 		<module>provider_role</module>
 		<module>provider_user</module>
-		<module>consumer_salary</module>
 		<module>provider_log</module>
+		<module>consumer_salary</module>
 	</modules>
 
 	<properties>
